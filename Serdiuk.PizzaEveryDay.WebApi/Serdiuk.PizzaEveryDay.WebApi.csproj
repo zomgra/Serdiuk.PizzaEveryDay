@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Serdiuk.PizzaEveryDay.Application\Serdiuk.PizzaEveryDay.Application.csproj" />
+    <ProjectReference Include="..\Serdiuk.PizzaEveryDay.Infrastructure\Serdiuk.PizzaEveryDay.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
