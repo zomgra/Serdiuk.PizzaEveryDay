@@ -20,7 +20,7 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.GetOrdersByUserId
 
         public async Task<Result<IEnumerable<OrderDto>>> Handle(GetOrdersByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var orders = _context.Orders.Include(o=>o.Products).Where(o=>o.UserId == request.UserId);
+            var orders = _context.Orders.AsNoTracking().Include(o=>o.Products).Where(o=>o.UserId == request.UserId);
             if (!orders.Any())
                 return Result.Fail("you have no orders");
 

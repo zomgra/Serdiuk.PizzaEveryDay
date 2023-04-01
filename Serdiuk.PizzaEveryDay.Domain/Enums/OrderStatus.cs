@@ -6,7 +6,7 @@
     public enum OrderStatus
     {
         Open = 0,
-        Payed = 1,
+        WaitingDelivery = 1,
         Cancel = 2,
         Expired = 3,
     }

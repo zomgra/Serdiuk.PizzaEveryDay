@@ -1,4 +1,5 @@
 ﻿using Serdiuk.PizzaEveryDay.Domain.Enums;
+using FluentResults;
 
 namespace Serdiuk.PizzaEveryDay.Domain
 {
@@ -42,6 +43,12 @@ namespace Serdiuk.PizzaEveryDay.Domain
         /// Bake street
         /// </summary>
         public string? StreetToBake { get; set; }
+
+        ///// <summary>
+        ///// Flag, whether the order are paid
+        ///// </summary>
+        ////public bool IsPayed { get; set; } = false;
+
         /// <summary>
         /// Total cost all product
         /// </summary>
@@ -74,6 +81,41 @@ namespace Serdiuk.PizzaEveryDay.Domain
         /// Status of order
         /// </summary>
         public OrderStatus Status { get; set; }
+        /// <summary>
+        /// Cancel the order
+        /// </summary>
+        /// <returns></returns>
+        public Result Cancel()
+        {
+            if (Status is OrderStatus.Open || Status is OrderStatus.WaitingDelivery)
+            {
+                Status = OrderStatus.Cancel;
+                return Result.Ok();
+            }
+            return Result.Fail("Order already canceled or expired");
+        }
+        /// <summary>
+        /// Pay for the order
+        /// </summary>
+        /// <returns></returns>
+        public Result Pay()
+        {
+            if(Status is OrderStatus.Open)
+            {
+                Status = OrderStatus.WaitingDelivery;
+                return Result.Ok();
+            }
+            return Result.Fail("Order already or already paid, canceled or expired");
+        }
+        public Result Edit(string newDeliveryStreet)
+        {
+            if (Status is not OrderStatus.Open || Status is not OrderStatus.WaitingDelivery)
+                return Result.Fail("The order is not pending or no longer pending delivery");
+            if (string.IsNullOrEmpty(newDeliveryStreet))
+                return Result.Fail("New delivery address is empty");
 
+            StreetToDelivery = newDeliveryStreet;
+            return Result.Ok();
+        }
     }
 }
