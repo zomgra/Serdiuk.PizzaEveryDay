@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serdiuk.PizzaEveryDay.WebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdiuk.PizzaEveryDay.Tests", "Serdiuk.PizzaEveryDay.Tests\Serdiuk.PizzaEveryDay.Tests.csproj", "{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdiuk.PizzaEveryDay.IdentityServer", "Serdiuk.PizzaEveryDay.IdentityServer\Serdiuk.PizzaEveryDay.IdentityServer.csproj", "{9C41D2C3-B0C6-4CD3-B258-6C69A342CFAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C41D2C3-B0C6-4CD3-B258-6C69A342CFAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C41D2C3-B0C6-4CD3-B258-6C69A342CFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C41D2C3-B0C6-4CD3-B258-6C69A342CFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C41D2C3-B0C6-4CD3-B258-6C69A342CFAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
