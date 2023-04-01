@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdiuk.PizzaEveryDay.Application", "Serdiuk.PizzaEveryDay.Application\Serdiuk.PizzaEveryDay.Application.csproj", "{E9083FED-DD6A-4084-A950-205D9D291042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serdiuk.PizzaEveryDay.Application", "Serdiuk.PizzaEveryDay.Application\Serdiuk.PizzaEveryDay.Application.csproj", "{E9083FED-DD6A-4084-A950-205D9D291042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdiuk.PizzaEveryDay.Domain", "Serdiuk.PizzaEveryDay.Domain\Serdiuk.PizzaEveryDay.Domain.csproj", "{A5283AC7-9F57-4F13-AD6C-BC60200B85A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serdiuk.PizzaEveryDay.Domain", "Serdiuk.PizzaEveryDay.Domain\Serdiuk.PizzaEveryDay.Domain.csproj", "{A5283AC7-9F57-4F13-AD6C-BC60200B85A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdiuk.PizzaEveryDay.Infrastructure", "Serdiuk.PizzaEveryDay.Infrastructure\Serdiuk.PizzaEveryDay.Infrastructure.csproj", "{B5FF4674-CEC0-40CF-ACA3-BBD49C963FF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serdiuk.PizzaEveryDay.Infrastructure", "Serdiuk.PizzaEveryDay.Infrastructure\Serdiuk.PizzaEveryDay.Infrastructure.csproj", "{B5FF4674-CEC0-40CF-ACA3-BBD49C963FF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdiuk.PizzaEveryDay.WebApi", "Serdiuk.PizzaEveryDay.WebApi\Serdiuk.PizzaEveryDay.WebApi.csproj", "{1318B39D-5DF3-4D93-9D10-9F6E9E86CB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serdiuk.PizzaEveryDay.WebApi", "Serdiuk.PizzaEveryDay.WebApi\Serdiuk.PizzaEveryDay.WebApi.csproj", "{1318B39D-5DF3-4D93-9D10-9F6E9E86CB13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdiuk.PizzaEveryDay.Tests", "Serdiuk.PizzaEveryDay.Tests\Serdiuk.PizzaEveryDay.Tests.csproj", "{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1318B39D-5DF3-4D93-9D10-9F6E9E86CB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1318B39D-5DF3-4D93-9D10-9F6E9E86CB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1318B39D-5DF3-4D93-9D10-9F6E9E86CB13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C2299D-B44B-44BC-BA66-6077F7A22BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,9 @@
     {
         Open = 0,
         WaitingDelivery = 1,
-        Cancel = 2,
-        Expired = 3,
+        Delivered = 2,
+        Payed = 3,
+        Cancel = 4,
+        Expired = 5,
     }
 }

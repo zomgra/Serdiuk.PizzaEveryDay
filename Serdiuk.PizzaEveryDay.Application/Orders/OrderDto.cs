@@ -10,9 +10,9 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders
         /// </summary>
         public int OrderId { get; set; }
         /// <summary>
-        /// Bake street
+        /// Delivery street
         /// </summary>
-        public string StreetToBake { get; set; }
+        public string StreetToDelivery { get; set; }
         /// <summary>
         /// Final Cost with promocode
         /// </summary>

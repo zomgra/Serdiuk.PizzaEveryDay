@@ -19,7 +19,7 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.Edit
 
         public async Task<Result<OrderDto>> Handle(EditOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(o=>o.OrderId == request.OrderId && o.UserId == request.UserId, cancellationToken);
+            var order = await _context.Orders.FirstOrDefaultAsync(o=>o.OrderId == request.OrderId, cancellationToken);
             if(order == null)
                 return Result.Fail("The order was not found or you do not have sufficient rights");
 
@@ -29,7 +29,7 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.Edit
                 return result;
 
             await _context.SaveChangesAsync(cancellationToken);
-            return _mapper.Map<OrderDto>(result).ToResult();   
+            return _mapper.Map<OrderDto>(order).ToResult();   
         }
     }
 }

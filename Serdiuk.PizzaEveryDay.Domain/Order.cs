@@ -11,11 +11,11 @@ namespace Serdiuk.PizzaEveryDay.Domain
             StreetToDelivery = streetToDelivery;
 
             //Use status randomization to test status filtering
-            Array values = Enum.GetValues(typeof(OrderStatus));
-            Random random = new Random();
-            OrderStatus status = (OrderStatus)values.GetValue(random.Next(values.Length));
-            Status = status;
-            //Status = OrderStatus.Open;
+            //Array values = Enum.GetValues(typeof(OrderStatus));
+            //Random random = new Random();
+            //OrderStatus status = (OrderStatus)values.GetValue(random.Next(values.Length));
+            //Status = status;
+            Status = OrderStatus.Open;
         }
 
         public Order(int orderId, Guid userId, string streetToDelivery, string streetToBake, OrderStatus status)
@@ -109,11 +109,12 @@ namespace Serdiuk.PizzaEveryDay.Domain
         }
         public Result Edit(string newDeliveryStreet)
         {
-            if (Status is not OrderStatus.Open || Status is not OrderStatus.WaitingDelivery)
+            if (Status != OrderStatus.Open && Status != OrderStatus.WaitingDelivery)
                 return Result.Fail("The order is not pending or no longer pending delivery");
             if (string.IsNullOrEmpty(newDeliveryStreet))
                 return Result.Fail("New delivery address is empty");
-
+            if (newDeliveryStreet.ToLower().Equals(StreetToDelivery.ToLower()))
+                return Result.Fail("This address has already been entered");
             StreetToDelivery = newDeliveryStreet;
             return Result.Ok();
         }

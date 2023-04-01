@@ -6,7 +6,7 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.Edit
     public class EditOrderCommand : IRequest<Result<OrderDto>>
     {
         /// <summary>
-        /// Order Idetifier
+        /// Order Identifier
         /// </summary>
         public int OrderId { get; set; }
         /// <summary>
