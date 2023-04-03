@@ -19,96 +19,53 @@ namespace Serdiuk.PizzaEveryDay.IdentityServer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LoginAsync(string returnUrl)
+        public IActionResult Login(string returnUrl)
         {
-            var model = new LoginViewModel()
-            {
-                ExternalProviders = await _signInManager.GetExternalAuthenticationSchemesAsync(),
-                ReturnUrl = returnUrl
-            };
-            return View(model);
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
-        public async Task<IActionResult> ExternalLogin(string provider, string returnUrl)
-        {
-            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Auth", new { returnUrl });
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return Challenge(properties, provider);
-        }
-        public async Task<IActionResult> ExternalLoginCallback(string returnUrl)
-        {
-            var info = await _signInManager.GetExternalLoginInfoAsync();
-            if (info == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false, false);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return RedirectToAction("RegisterExternal", new ExternalLoginViewModel
-            {
-                ReturnUrl = returnUrl,
-                UserName = info.Principal.FindFirstValue(ClaimTypes.Name)
-            });
-        }
-        [AllowAnonymous]
-        public IActionResult RegisterExternal(ExternalLoginViewModel model)
-        {
-            return View(model);
-        }
-
-        [AllowAnonymous]
         [HttpPost]
-        [ActionName("RegisterExternal")]
-        public async Task<IActionResult> RegisterExternalConfirmed(ExternalLoginViewModel model)
+        public async Task<IActionResult> LoginAsync(LoginViewModel model)
         {
-            var info = await _signInManager.GetExternalLoginInfoAsync();
-            if (info == null)
+            if (!ModelState.IsValid) return View(model);
+
+            var res = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+            if (!res.Succeeded)
             {
-                return RedirectToAction("Login");
+                ModelState.AddModelError(string.Empty, "Invalid credentials");
+
+                return View(model);
             }
+            return Redirect(model.ReturnUrl);
+        }
 
-            var user = new ApplicationUser(model.UserName);
-
-            var result = await _userManager.CreateAsync(user);
-            if (result.Succeeded)
+        [HttpGet]
+        public IActionResult Register(string returnUrl)
+        {
+            return View(new RegisterViewModel { ReturnUrl = returnUrl });
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            var user = new ApplicationUser
             {
-                var identityResult = await _userManager.AddLoginAsync(user, info);
-                if (identityResult.Succeeded)
+                UserName = model.Username,
+            };
+            try
+            {
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (!result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index");
+                    return BadRequest(result.Errors);
                 }
+
+                await _signInManager.SignInAsync(user, isPersistent: false);
             }
-            return View(model);
+            catch (Exception)
+            {
+                throw;
+            }
+            return Redirect(model.ReturnUrl);
         }
-        public async Task<IActionResult> Login(LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                model.ExternalProviders = await _signInManager.GetExternalAuthenticationSchemesAsync();
-                return View(model);
-            }
 
-            var user = await _userManager.FindByNameAsync(model.UserName);
-
-            if (user == null)
-            {
-                model.ExternalProviders = await _signInManager.GetExternalAuthenticationSchemesAsync();
-                ModelState.AddModelError("", "User not found");
-                return View(model);
-            }
-
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
-            if (result.Succeeded)
-            {
-                return Redirect(model.ReturnUrl);
-            }
-            model.ExternalProviders = await _signInManager.GetExternalAuthenticationSchemesAsync();
-            return View(model);
-        }
     }
 }

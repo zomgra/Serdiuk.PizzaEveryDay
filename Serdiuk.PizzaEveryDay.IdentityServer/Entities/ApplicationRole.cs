@@ -2,7 +2,7 @@
 
 namespace Serdiuk.PizzaEveryDay.IdentityServer.Entities
 {
-    public class ApplicationRole : IdentityRole
+    public class ApplicationRole : IdentityRole<Guid>
     {
 
     }

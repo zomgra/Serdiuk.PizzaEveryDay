@@ -11,7 +11,7 @@ namespace Serdiuk.PizzaEveryDay.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProductsAsync()
         {
-            var query = new GetAllProductQuery();
+                var query = new GetAllProductQuery();
             var result = await Mediator.Send(query);
             if (result.IsFailed)
                 return BadRequest(result.Reasons.Select(m => m.Message));

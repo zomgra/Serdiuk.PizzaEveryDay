@@ -43,14 +43,7 @@ builder.Services.AddIdentityServer()
     .AddDeveloperSigningCredential();
 
 
-builder.Services.AddAuthentication()
-    .AddGoogle("google", opt =>
-    {
-        var googleAuth = Configuration.GetSection("Auth:Google");
-        opt.ClientId = googleAuth["ClientId"];
-        opt.ClientSecret = googleAuth["Secret"];
-        opt.SignInScheme = IdentityConstants.ExternalScheme;
-    });
+builder.Services.AddAuthentication();
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
@@ -80,5 +73,7 @@ app.UseIdentityServer();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Services.CreateScope().ServiceProvider.GetService<AuthDbContext>().Database.EnsureCreated();
 
 app.Run();
