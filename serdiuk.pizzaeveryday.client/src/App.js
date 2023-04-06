@@ -1,4 +1,3 @@
-
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import PrivateRouter from './utils/Router/PrivateRouter';
@@ -8,6 +7,7 @@ import LoginCallbackPage from './Callback/LoginCallbackPage'
 import RestaurantPage from './Pages/RestaurantPage/RestaurantPage';
 import { useState } from 'react';
 import Header from './components/Header';
+import OrderPage from './Pages/OrderPage/OrderPage';
 
 function App() {
 
@@ -18,8 +18,6 @@ function App() {
     setCartProduct(cartProduct.filter(product => product.id !== id));
 
   };
-
-
   return (
     <>
       <Header handleCart={() => setCartOpen(p => !p)} cartProduct={cartProduct} />
@@ -27,6 +25,7 @@ function App() {
         <Route path='/' element={<PrivateRouter />}>
           <Route path='/' element={<WelcomePage />}></Route>
           <Route path='/restaurant' element={<RestaurantPage cartProducts={cartProduct} isCartOpen={isCartOpen} setCartOpen={setCartOpen} setCartProduct={setCartProduct} removeFromOrder={removeFromOrder}/>}></Route>
+          <Route path='/order/:id' element={<OrderPage />}></Route>
         </Route>
         <Route path='/login' element={<LoginPage />}></Route>
         <Route path='/signin-oidc' element={<LoginCallbackPage />}></Route>

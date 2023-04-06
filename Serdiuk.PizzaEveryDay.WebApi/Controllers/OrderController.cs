@@ -9,7 +9,7 @@ using Serdiuk.PizzaEveryDay.WebApi.Controllers.Base;
 
 namespace Serdiuk.PizzaEveryDay.WebApi.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/product/orders")]
     public class OrderController : BaseApiController
