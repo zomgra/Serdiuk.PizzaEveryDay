@@ -21,7 +21,9 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.Edit
         {
             var order = await _context.Orders.FirstOrDefaultAsync(o=>o.OrderId == request.OrderId, cancellationToken);
             if(order == null)
-                return Result.Fail("The order was not found or you do not have sufficient rights");
+                return Result.Fail("The order was not found");
+            if (order.UserId != request.UserId)
+                return Result.Fail("You do not have sufficient rights");
 
             var result = order.Edit(request.Street);
 

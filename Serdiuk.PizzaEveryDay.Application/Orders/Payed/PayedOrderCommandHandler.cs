@@ -1,20 +1,23 @@
-﻿using FluentResults;
+﻿using AutoMapper;
+using FluentResults;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serdiuk.PizzaEveryDay.Application.Common.Interfaces;
 
 namespace Serdiuk.PizzaEveryDay.Application.Orders.Payed
 {
-    public class PayedOrderCommandHandler : IRequestHandler<PayedOrderCommand, Result>
+    public class PayedOrderCommandHandler : IRequestHandler<PayedOrderCommand, Result<OrderDto>>
     {
         private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public PayedOrderCommandHandler(IApplicationDbContext context)
+        public PayedOrderCommandHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            this._mapper = mapper;
         }
 
-        public async Task<Result> Handle(PayedOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Result<OrderDto>> Handle(PayedOrderCommand request, CancellationToken cancellationToken)
         {
             var order = await _context.Orders.FirstOrDefaultAsync(o=>o.OrderId == request.OrderId, cancellationToken);
             if (order == null || order.UserId != request.UserId)
@@ -27,7 +30,8 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.Payed
             
             await _context.SaveChangesAsync(cancellationToken);
 
-            return result;
+
+            return _mapper.Map<OrderDto>(order).ToResult().WithErrors(result.Errors);
         }
     }
 }

@@ -13,24 +13,64 @@ async function getToken() {
 }
 
 export async function getAllProducts() {
-    var responce = await instance.get('/product');
-    return responce.data;
+    var response = await instance.get('/product');
+    return response.data;
 }
 export async function getDiscountAmount(code) {
-    var responce = await instance.get('/promocode',{
-        params: {code:code},
-        headers:{
+    var response = await instance.get('/promocode', {
+        params: { code: code },
+        headers: {
             'Authorization': await getToken(),
         }
     })
-    return responce;
+    return response;
 }
-export async function createOrderHandler(data){
-    var responce = await instance.post('/product/orders',JSON.stringify(data),{
-        headers:{
+export async function createOrderHandler(data) {
+    console.log(await getToken());
+    var response = await instance.post('/product/orders', JSON.stringify(data), {
+        headers: {
             'Authorization': await getToken(),
             'Content-Type': 'application/json',
         }
     })
-    return responce;
+    return response;
+}
+export async function editOrder(data) {
+
+    var response = await instance.put('/product/orders/edit', JSON.stringify(data), {
+
+        headers: {
+            'Authorization': await getToken(),
+            'Content-Type': 'application/json',
+        }
+    })
+    return response;
+}
+export async function cancelOrder(data) {
+    var response = await instance.delete('/product/orders', {
+        data: data,
+        headers: {
+            'Authorization': await getToken(),
+        }
+    })
+    return response;
+}
+export async function payOrder(data) {
+    var response = await instance.put('/product/orders', JSON.stringify(data), {
+        headers: {
+            'Authorization': await getToken(),
+            'Content-Type': 'application/json',
+        }
+    })
+    return response;
+}
+export async function getAllOrders(filter) {
+    var response = await instance.get('product/orders', {
+        headers: {
+            'Authorization': await getToken(),
+            'Content-Type': 'application/json',
+        },
+        params: filter,
+    })
+    return response;
 }

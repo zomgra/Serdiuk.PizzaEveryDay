@@ -28,7 +28,7 @@ export default function DrinkListItem({ drink, addInCart }) {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase sx={{ width: 128, height: 128 }}>
-              <Img alt="pizza" src={drink.imageUrl} />
+              <Img alt={drink.name} src={drink.imageUrl} />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
@@ -46,7 +46,7 @@ export default function DrinkListItem({ drink, addInCart }) {
               </Grid>
               <Grid item>
                 <Button
-                  onClick={() => { addInCart(drink.id, drink.name, drink.cost) }}
+                  onClick={() => { addInCart(drink.productId, drink.name, drink.cost) }}
                   variant={'contained'} sx={{ cursor: 'pointer' }} >
                   Add In Cart
                 </Button>

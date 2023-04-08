@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Serdiuk.PizzaEveryDay.Application.Orders.Payed
 {
-    public class PayedOrderCommand : IRequest<Result>
+    public class PayedOrderCommand : IRequest<Result<OrderDto>>
     {
         /// <summary>
         /// Order identifier

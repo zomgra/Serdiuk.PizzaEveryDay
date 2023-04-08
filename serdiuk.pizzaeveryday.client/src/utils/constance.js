@@ -18,3 +18,20 @@ export const ALL_PIZZERIA_ADDRESSES = [
     "Leipziger Platz 12	Berlin",
     "Muenzstrasse 13 Braunschweig",
 ]
+
+export const ORDER_STATUS_LOOKUP = {
+    0: 'Open',
+    1: 'WaitingDelivery',
+    2: 'Delivered',
+    3: 'Payed',
+    4: 'Cancel',
+    5: 'Expired',
+  };
+ export const ORDER_STATUS_COLORS = {
+    0: 'green',
+    1: 'blue',
+    2: 'gray',
+    3: 'orange',
+    4: 'red',
+    5: 'black',
+  };

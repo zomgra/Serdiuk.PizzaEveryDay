@@ -16,7 +16,7 @@ namespace Serdiuk.PizzaEveryDay.Tests.Orders.Command
                 OrderId = 1,
                 UserId = ApplicationContextFactory.UserIdA,
             };
-            var handler = new PayedOrderCommandHandler(Context);
+            var handler = new PayedOrderCommandHandler(Context, Mapper);
             // Act
 
             var order = await handler.Handle(command, CancellationToken.None);
@@ -33,7 +33,7 @@ namespace Serdiuk.PizzaEveryDay.Tests.Orders.Command
                 OrderId = 3,
                 UserId = ApplicationContextFactory.UserIdA,
             };
-            var handler = new PayedOrderCommandHandler(Context);
+            var handler = new PayedOrderCommandHandler(Context, Mapper);
             // Act
 
             var order = await handler.Handle(command, CancellationToken.None);
@@ -50,7 +50,7 @@ namespace Serdiuk.PizzaEveryDay.Tests.Orders.Command
                 OrderId = 1,
                 UserId = ApplicationContextFactory.UserIdB,
             };
-            var handler = new PayedOrderCommandHandler(Context);
+            var handler = new PayedOrderCommandHandler(Context, Mapper);
             // Act
 
             var order = await handler.Handle(command, CancellationToken.None);

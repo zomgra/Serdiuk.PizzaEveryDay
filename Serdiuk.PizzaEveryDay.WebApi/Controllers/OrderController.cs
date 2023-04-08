@@ -45,7 +45,7 @@ namespace Serdiuk.PizzaEveryDay.WebApi.Controllers
             if (result.IsFailed)
                 return BadRequest(result.Reasons.Select(result => result.Message));
 
-            return Ok();
+            return Ok(result.Value);
         }
         [HttpDelete]
         public async Task<IActionResult> CancelOrder(CancelOrderCommandDto request, CancellationToken cancellationToken)
@@ -56,7 +56,7 @@ namespace Serdiuk.PizzaEveryDay.WebApi.Controllers
             if (result.IsFailed)
                 return BadRequest(result.Reasons.Select(result => result.Message));
 
-            return Ok();
+            return Ok(result.Value);
         }
         [HttpPut("edit")]
         public async Task<IActionResult> EditOrderAsync(EditOrderCommandDto request, CancellationToken cancellationToken)

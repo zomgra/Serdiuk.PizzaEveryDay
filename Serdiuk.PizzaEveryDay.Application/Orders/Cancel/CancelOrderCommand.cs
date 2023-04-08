@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Serdiuk.PizzaEveryDay.Application.Orders.Cancel
 {
-    public class CancelOrderCommand : IRequest<Result>
+    public class CancelOrderCommand : IRequest<Result<OrderDto>>
     {
         /// <summary>
         /// Order Identifier
