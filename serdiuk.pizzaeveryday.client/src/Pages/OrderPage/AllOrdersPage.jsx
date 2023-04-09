@@ -2,22 +2,38 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { getAllOrders } from '../../Services/PizzaService';
-import { Button, Grid, Paper, Typography } from '@mui/material';
+import { Button, Grid, Snackbar, Paper, Typography } from '@mui/material';
+import CloseSnackbarButton from '../../components/CloseSnackbarButton/CloseSnackbarButton';
 import OrderStatusText from '../../components/OrderStatusText/OrderStatusText';
 import { useNavigate } from 'react-router-dom';
+import OrderStatusFilterItems from '../../components/OrderStatusFilterItems/OrderStatusFilterItems';
+import FinalCostOrder from '../../components/FinalCostOrder/FinalCostOrder';
 
 export default function AllOrdersPage() {
 
     const [orders, setOrders] = useState([]);
+    const [selectStatus, setSelectStatus] = useState(0);
+    const [snackSetting, setSnackSetting] = useState({ snackOpen: false, snackMessage: '' })
+
     const navigate = useNavigate();
+
+    function snackHandler(message) {
+        setSnackSetting({ snackOpen: true, snackMessage: message });
+    }
+
+    async function changeOrderFilter(status){
+        setSelectStatus(status)
+        await fetchOrders(status);
+    }
 
     async function fetchOrders(filter) {
         try {
-            const response = await getAllOrders(0);
+            const response = await getAllOrders(filter);
             setOrders(response.data);
+            console.log(orders);
         }
         catch (e) {
-            console.log(e);
+            snackHandler(e.response.data);
         }
     }
     async function selectOrder(order) {
@@ -25,23 +41,26 @@ export default function AllOrdersPage() {
     }
     useEffect(() => {
         fetchOrders(0)
-        console.log(orders);
     }, [])
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2}  justifyContent="center"> 
+         <Snackbar
+                message={snackSetting.snackMessage}
+                open={snackSetting.snackOpen}
+                autoHideDuration={5000}
+                onClose={() => setSnackSetting({ snackOpen: false })}
+                action={<CloseSnackbarButton text={"Close"} action={() => setSnackSetting({ snackOpen: false })} />} />
+            
+            <Grid item xs={12}>
+                <OrderStatusFilterItems selectStatus={selectStatus} onChange={changeOrderFilter}/>
+            </Grid>
             {orders.map((order) => (
                 <Grid item xs={12} sm={5} sx={{ m: 3 }} key={order.orderId}>
                     <Paper sx={{ p: 2, display: "flex", justifyContent: "space-between" }}>
                         <div>
                             <div>Delivery Address: {order.streetToDelivery}</div>
                             <div>
-                                {order.promocode ? (
-                                    <Typography color="error">Total cost: {order.finalCost - order.promocode}</Typography>
-                                ) : (
-                                    <Typography variant="body2" color="textSecondary">
-                                        Total cost: {order.finalCost}
-                                    </Typography>
-                                )}
+                                <FinalCostOrder finalCost={order.finalCost} promocode={order.promocode}/>
                             </div>
                         </div>
                         <div>

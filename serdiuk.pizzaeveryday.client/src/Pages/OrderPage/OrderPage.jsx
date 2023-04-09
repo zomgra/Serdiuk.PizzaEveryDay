@@ -107,7 +107,7 @@ export default function OrderPage() {
                 )}
                 <TextField
                     label="Promocode"
-                    value={order.promocode ?? "N/A"}
+                    value={order.promocode.code ?? "N/A"}
                     fullWidth
                     disabled
                     sx={{ mb: 2 }}

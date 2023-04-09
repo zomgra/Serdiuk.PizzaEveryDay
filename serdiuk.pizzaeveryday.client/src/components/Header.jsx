@@ -3,7 +3,7 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import React from 'react'
 import BorderAllIcon from '@mui/icons-material/BorderAll';
 import { userManager } from '../Services/AuthService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header({ cartProduct, handleCart }) {
 
@@ -18,7 +18,9 @@ export default function Header({ cartProduct, handleCart }) {
                     variant='h6'
                     component='span'
                 >
-                    Pizza Every Day
+                    <Link to="/restaurant" >
+                        Pizza Every Day
+                    </Link>
                 </Typography>
                 <IconButton
                     onClick={(e) => {
@@ -33,7 +35,7 @@ export default function Header({ cartProduct, handleCart }) {
                 </IconButton>
                 {isAuth && (
                     <IconButton
-                        onClick={()=> navigate('/orders')}>
+                        onClick={() => navigate('/orders')}>
                         <BorderAllIcon />
                     </IconButton>
                 )}

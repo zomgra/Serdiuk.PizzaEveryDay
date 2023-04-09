@@ -70,7 +70,7 @@ export async function getAllOrders(filter) {
             'Authorization': await getToken(),
             'Content-Type': 'application/json',
         },
-        params: filter,
+        params: {status: filter},
     })
     return response;
 }
