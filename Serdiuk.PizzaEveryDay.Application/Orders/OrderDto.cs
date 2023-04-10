@@ -29,5 +29,9 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders
         /// Status of order
         /// </summary>
         public OrderStatus Status { get; set; }
+        /// <summary>
+        /// Total cost order
+        /// </summary>
+        public decimal TotalCost { get;  set; }
     }
 }

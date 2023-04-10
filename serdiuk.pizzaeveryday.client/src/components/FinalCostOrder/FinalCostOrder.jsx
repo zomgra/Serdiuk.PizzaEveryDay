@@ -1,12 +1,15 @@
 import { Typography } from '@mui/material';
 import React from 'react'
 
-export default function FinalCostOrder({ finalCost, promocode }) {
+export default function FinalCostOrder({ finalCost, totalCost, promocode }) {
+
+
 
     const realCost = promocode ? finalCost + promocode.discountAmount : finalCost;
 
     return (
         <>
+        {console.log({finalCost, promocode})}
             {promocode ? (
                 <>
                     <Typography color="error" sx={{ whiteSpace: 'nowrap' }}>
@@ -27,7 +30,7 @@ export default function FinalCostOrder({ finalCost, promocode }) {
                 </>
             ) : (
                 <Typography variant="body2" color="textSecondary">
-                    Total cost: ${realCost}
+                    Total cost: ${finalCost}
                 </Typography>
             )}
         </>

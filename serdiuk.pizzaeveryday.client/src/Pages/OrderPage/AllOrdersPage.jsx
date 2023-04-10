@@ -60,7 +60,7 @@ export default function AllOrdersPage() {
                         <div>
                             <div>Delivery Address: {order.streetToDelivery}</div>
                             <div>
-                                <FinalCostOrder finalCost={order.finalCost} promocode={order.promocode}/>
+                                <FinalCostOrder totalCost={order.totalCost} finalCost={order.finalCost} promocode={order.promocode}/>
                             </div>
                         </div>
                         <div>

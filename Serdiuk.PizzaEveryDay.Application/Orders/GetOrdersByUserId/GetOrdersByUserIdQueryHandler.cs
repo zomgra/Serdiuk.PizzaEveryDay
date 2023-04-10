@@ -20,18 +20,18 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.GetOrdersByUserId
 
         public async Task<Result<IEnumerable<OrderDto>>> Handle(GetOrdersByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var orders = _context.Orders.AsNoTracking().Include(o=>o.Products).Where(o=>o.UserId == request.UserId);
+            var orders = await _context.Orders.AsNoTracking().Include(o=>o.Promocode).Include(o=>o.Products).Where(o=>o.UserId == request.UserId).ToListAsync();
             if (!orders.Any())
                 return Result.Fail("you have no orders");
 
-            if (!request.Status.HasValue)
-            {
-                var result = await orders.ProjectTo<OrderDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
-                return Result.Ok<IEnumerable<OrderDto>>(result);
-            }
+            
             var sordetOrders = orders.OrderByDescending(o=>o.Status == request.Status);
-            var results = await sordetOrders.ProjectTo<OrderDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
-
+            var results = new List<OrderDto>();
+            foreach (var order in sordetOrders)
+            {
+                results.Add(_mapper.Map<OrderDto>(order));
+            }
+               
             return Result.Ok<IEnumerable<OrderDto>>(results);
         }
     }

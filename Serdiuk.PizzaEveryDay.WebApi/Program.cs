@@ -26,21 +26,12 @@ builder.Services.AddCors(c =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, config =>
     {
-        config.SaveToken = true;
-        config.Audience = "PizzaApi";
         config.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidAudience = "PizzaApi",
-            ValidIssuer = "https://localhost:10001",
-            ClockSkew = TimeSpan.Zero,
-            SaveSigninToken = true,
+            ValidateAudience = false
         };
-
         config.Authority = "https://localhost:10001";
     });
-
-builder.Services.AddAuthentication();
-builder.Services.AddAuthorization();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -58,9 +49,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors();
+
+app.MapControllers();
 
 app.MapControllers();
 

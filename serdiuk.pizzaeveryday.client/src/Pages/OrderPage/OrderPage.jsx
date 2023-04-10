@@ -57,10 +57,13 @@ export default function OrderPage() {
     async function submitEditStreet() {
 
         const data = { orderId: order.orderId, street: editedStreet }
+        console.log(data);
         try {
             var responce = await editOrder(data);
             setOrder(responce.data);
+            
             snackHandler('success edit street')
+            setEditStreet(false);
         }
         catch (e) {
             snackHandler(e.response.data)
@@ -107,7 +110,7 @@ export default function OrderPage() {
                 )}
                 <TextField
                     label="Promocode"
-                    value={order.promocode.code ?? "N/A"}
+                    value={order?.promocode?.code ?? "N/A"}
                     fullWidth
                     disabled
                     sx={{ mb: 2 }}
