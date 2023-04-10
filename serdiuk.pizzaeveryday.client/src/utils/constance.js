@@ -7,10 +7,13 @@ export const AUTH_CONFIG = {
     redirect_uri: `${CURRENT_URL}/signin-oidc`,
     post_logout_redirect_uri: `${CURRENT_URL}/login`,
     response_type: 'id_token token',
-    scope: 'openid profile PizzaApi offline_access',
+    scope: 'openid profile email PizzaApi offline_access',
     accessTokenExpiringNotificationTime: 300,
     automaticSilentRenew: true,
     silent_redirect_uri: `${CURRENT_URL}/silent-renew`,
+    extraQueryParams: {
+        scope: 'openid profile email name api'
+      },
     persistAccessToken: true,
 }
 export const ALL_PIZZERIA_ADDRESSES = [

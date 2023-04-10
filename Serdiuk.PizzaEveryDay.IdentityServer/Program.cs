@@ -18,12 +18,11 @@ builder.Services.AddCors(b =>
         .WithOrigins("http://localhost:3000");
     });
 });
-
 builder.Services.AddDbContext<AuthDbContext>(config =>
 {
     config.UseInMemoryDatabase("MEMORY");
 })
-                .AddIdentity<ApplicationUser, ApplicationRole>(config =>
+                .AddIdentity<ApplicationUser, IdentityRole>(config =>
                 {
                     config.Password.RequireDigit = false;
                     config.Password.RequireLowercase = false;
@@ -33,6 +32,7 @@ builder.Services.AddDbContext<AuthDbContext>(config =>
                 })
                 .AddEntityFrameworkStores<AuthDbContext>()
                 .AddDefaultTokenProviders();
+
 
 builder.Services.AddIdentityServer()
     .AddAspNetIdentity<ApplicationUser>()
@@ -74,6 +74,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.Services.CreateScope().ServiceProvider.GetService<AuthDbContext>().Database.EnsureCreated();
 
 app.Run();

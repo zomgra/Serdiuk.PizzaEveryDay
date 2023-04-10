@@ -1,5 +1,7 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4;
+using System.Security.Claims;
+using IdentityModel;
 
 public static class IdentityConfiguration
 {
@@ -23,6 +25,8 @@ public static class IdentityConfiguration
             ClientName = "PizzaApi",
             RequireClientSecret = false,
             RequirePkce = true,
+            AlwaysSendClientClaims = true,
+            AlwaysIncludeUserClaimsInIdToken = true,
             AllowedScopes =
             {
                 "PizzaApi",
@@ -30,6 +34,7 @@ public static class IdentityConfiguration
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.Profile,
             },
+            IncludeJwtId = true,
             AllowedCorsOrigins =
             {
                 "http://localhost:3000"
@@ -48,6 +53,5 @@ public static class IdentityConfiguration
         yield return new IdentityResources.OpenId();
         yield return new IdentityResources.Profile();
         yield return new IdentityResources.Email();
-
     }
 }

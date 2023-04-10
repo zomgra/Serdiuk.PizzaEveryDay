@@ -2,7 +2,7 @@
 
 namespace Serdiuk.PizzaEveryDay.IdentityServer.Entities
 {
-    public class ApplicationUser : IdentityUser<Guid>
+    public class ApplicationUser : IdentityUser
     {
         public ApplicationUser()
         { 

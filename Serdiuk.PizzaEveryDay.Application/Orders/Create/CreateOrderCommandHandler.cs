@@ -27,6 +27,10 @@ namespace Serdiuk.PizzaEveryDay.Application.Orders.Create
             if (request.PromoCode != null)
             {
                 promocode = await _context.Promocodes.FirstOrDefaultAsync(c => c.Code.Equals(request.PromoCode.ToLower()), cancellationToken);
+                var useResult = promocode.Use();
+
+                if (useResult.IsFailed)
+                    return Result.Fail(useResult.Errors);
             }
 
             var products = request.ProductsId

@@ -27,7 +27,7 @@ function App() {
           <Route path='/' element={<WelcomePage />}></Route>
           <Route path='/restaurant' element={<RestaurantPage cartProducts={cartProduct} isCartOpen={isCartOpen} setCartOpen={setCartOpen} setCartProduct={setCartProduct} removeFromOrder={removeFromOrder}/>}></Route>
           <Route path='/order/:id' element={<OrderPage />}></Route>
-          <Route path='orders' element={<AllOrdersPage/>}></Route>
+          <Route path='/orders' element={<AllOrdersPage/>}></Route>
         </Route>
         <Route path='/login' element={<LoginPage />}></Route>
         <Route path='/signin-oidc' element={<LoginCallbackPage />}></Route>

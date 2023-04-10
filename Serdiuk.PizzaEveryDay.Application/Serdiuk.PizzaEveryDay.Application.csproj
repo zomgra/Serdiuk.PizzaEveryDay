@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Serdiuk.PizzaEveryDay.Domain\Serdiuk.PizzaEveryDay.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Orders\ApplyDelivery\" />
-  </ItemGroup>
-
 </Project>

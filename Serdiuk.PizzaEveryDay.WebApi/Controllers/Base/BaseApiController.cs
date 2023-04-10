@@ -13,5 +13,7 @@ namespace Serdiuk.PizzaEveryDay.WebApi.Controllers.Base
         internal Guid UserId => !User.Identity.IsAuthenticated
             ? Guid.Empty
             : Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+        public string UserName => User.Identity.Name;
     }
 }

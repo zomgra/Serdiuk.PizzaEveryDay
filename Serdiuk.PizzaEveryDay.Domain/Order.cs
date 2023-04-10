@@ -107,6 +107,11 @@ namespace Serdiuk.PizzaEveryDay.Domain
             }
             return Result.Fail("Order already or already paid, canceled or expired");
         }
+        /// <summary>
+        /// Edit street to selivery
+        /// </summary>
+        /// <param name="newDeliveryStreet"></param>
+        /// <returns></returns>
         public Result Edit(string newDeliveryStreet)
         {
             if (Status != OrderStatus.Open && Status != OrderStatus.WaitingDelivery)
@@ -116,6 +121,13 @@ namespace Serdiuk.PizzaEveryDay.Domain
             if (newDeliveryStreet.ToLower().Equals(StreetToDelivery.ToLower()))
                 return Result.Fail("This address has already been entered");
             StreetToDelivery = newDeliveryStreet;
+            return Result.Ok();
+        }
+        public Result ApplyDelivery()
+        {
+            if (Status != OrderStatus.WaitingDelivery)
+                return Result.Fail("The order can`t be delivered");
+            Status = OrderStatus.Delivered;
             return Result.Ok();
         }
     }

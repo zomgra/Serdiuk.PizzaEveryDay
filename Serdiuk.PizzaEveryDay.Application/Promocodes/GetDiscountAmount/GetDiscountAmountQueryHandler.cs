@@ -25,7 +25,6 @@ namespace Serdiuk.PizzaEveryDay.Application.Promocodes.GetDiscountAmount
                 return Result.Fail("Promocode is fully used");
 
             // TODO : Make in admin panel view used promocodes
-
             return Result.Ok(promocode.DiscountAmount);
         }
     }
