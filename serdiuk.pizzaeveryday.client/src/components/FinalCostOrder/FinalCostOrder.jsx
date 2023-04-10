@@ -23,7 +23,7 @@ export default function FinalCostOrder({ finalCost, totalCost, promocode }) {
                                 mr: 1,
                             }}
                         >
-                            {realCost}
+                            {totalCost}
                         </Typography>
                         <Typography component="span" color={'textSecondary'} variant='body2' sx={{pb:1}}>{finalCost}</Typography>
                     </Typography>
